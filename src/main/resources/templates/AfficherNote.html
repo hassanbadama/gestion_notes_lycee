@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header>
+   <div class="logo">
+	   <h1><img alt="" src="/images/logo.png" id="logo"></h1>
+   </div>
+   <nav id="l">
+       <div id="men">
+        <span><a href="">Gestion Notes</a></span>
+        <div id="sous">
+          <span>  <a th:href="@{note}">AJOUTER</a></span>
+          <span>  <a th:href="@{afficherNote}">AFFICHER</a></span>
+        </div>
+      </div>
+   </nav>
+ </header>
+
+ <div class="form">
+ <fieldset>
+    <form method="post" th:action="@{afficherValideNote}" id="myform">
+    <h1>Consulter Notes</h1>
+    <hr/>
+        <table>
+             <tr>
+				
+                <td>code matiere</td> <td>
+				  <select  class="sexe" name="matiere">
+					  <option th:each="p:${enseigne}"th:if="${p.matricule.matricule==ID}"th:text="${p.codMatiere.codMatiere}"></option>
+				  </select>
+				<br><br></td>
+            </tr>
+             <tr>
+				
+                <td>Classe</td> <td>
+					 <select class="sexe" name="classe1">
+					    <option th:each="p:${enseigne}" th:if="${p.matricule.matricule==ID}"th:text="${p.codClasse.CodClasse}"></option>
+				    </select>
+					<br><br></td>
+            </tr>
+             <tr>
+                <td colspan="2"><input type="submit" id="submit"/></td>
+            </tr>
+           
+        </table>
+         
+    </form>
+    
+ </fieldset> 
+ <div class="prof">
+	  <h1>Notes</h1>
+    <hr>
+    <div class="liste">
+	  <table class="tab">
+			<thead>
+			   <tr>
+                <td>Idenfiant eleve </td> <td> Code classe</td> <td>nom</td> <td>prenom</td>  <td>Matiere</td>  <td>Notes</td>  <td class="modif">Modifier </td>  <td class="supp">Supprimer</td>
+               </tr>
+            </thead>
+            <tbody th:each="p:${lisnote}">
+              <tr th:if="${p.idEleve.classe.codClasse==classe AND p.CodeMatiere.codMatiere==matiere}" >
+                
+					<td th:text="${p.idEleve.id}"></td>
+					<td th:text="${p.idEleve.classe.codClasse}"></td>
+					<td th:text="${p.idEleve.nom}"></td>
+					<td th:text="${p.idEleve.prenom}"></td>
+					<td th:text="${p.CodeMatiere.codMatiere}"></td>
+					<!--  <td th:text="${p.CodeMatiere.nomMatiere}"></td>-->
+					<td th:text="${p.note}"></td>
+					<td class="modif"> <a th:href="@{ModifierNote?(matricule=${p.idEleve.id},codem=${p.CodeMatiere.codMatiere})}">Modifier</a></td>
+					<td class="supp"> <a onclick="return confirm('Etes vous sure de vouloir supprimer')" th:href="@{supprimerNote?(matricule=${p.idEleve.id},codem=${p.CodeMatiere.codMatiere})}"> Supprimer </a></td>
+			  
+			  </tr>
+			</tbody>
+	</table>
+	</div>
+ </div>
+</div>
+<footer>
+  <center>
+	 <h1>Contact Nous </h1>
+     <hr>
+		<h4>Adesse du Proviseur : 565757884884884</h4> 
+		<h4>Adesse du Directeur : 565757884884884</h4> 
+	</center>
+</footer>
+<script>
+   let form = document.getElementById("myform");
+   form.addEventListener("submit", function(e){
+	   let matricule = document.getElementById("matricule");
+	   let nom = document.getElementById("nom");
+	   let prenom = document.getElementById("prenom");
+	   let numero = document.getElementById("numero");
+	   let date = document.getElementById("date");
+	   let form = document.getElementById("myform");
+	   if(matricule.value==""){
+		   e.preventDefault()
+		   let erreur = document.getElementById("erreur");
+		   erreur.innerHTML="vous avez laissez champs vide";
+		   erreur.style.color="red";
+	   }
+	   if(nom.value==""){
+		   e.preventDefault()
+		   let erreur = document.getElementById("erreurNom");
+		   erreur.innerHTML="vous avez laissez champs vide";
+		   erreur.style.color="red";
+	   }
+	   if(prenom.value==""){
+		   e.preventDefault()
+		   let erreur = document.getElementById("erreurPrenom");
+		   erreur.innerHTML="vous avez laissez champs vide";
+		   erreur.style.color="red";
+	   }
+	   if(numero.value==""){
+		   e.preventDefault()
+		   let erreur = document.getElementById("erreurNumero");
+		   erreur.innerHTML="vous avez laissez champs vide";
+		   erreur.style.color="red";
+	   }
+	   if(date.value==""){
+		   e.preventDefault()
+		   let erreur = document.getElementById("erreurDate");
+		   erreur.innerHTML="vous avez laissez champs vide";
+		   erreur.style.color="red";
+	   }
+   })
+</script>
+
+</body>
+</html>

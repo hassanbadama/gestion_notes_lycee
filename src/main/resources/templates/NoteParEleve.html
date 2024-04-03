@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="UTF-8"/>
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+	</head>
+<body>
+<header>
+   <div class="logo">
+	   <h1><img alt="" src="/images/logo.png" id="logo"></h1>
+   </div>
+   <nav id="l">
+       <div id="men">
+        <span><a th:href="@{vosnote}">Consulter Notes</a></span>
+      </div>
+       <div id="men">
+        <span><a th:href="@{bulletin}">Consulter Bulletin</a></span>
+      </div>
+       <div id="men">
+        <span><a th:href="@{modifierMotpasse?(id=${ID})}">Modifier Mot de passe</a></span>
+      </div>
+   </nav>
+ </header>
+	   <section class="bulle1">
+	    <div class="bulletin">
+	      <div class="entete1">
+	        <div class="logo1">
+	            <h1><img alt="" src="/images/logo.png" id="logo"></h1>
+	            <h2>Annee Scolaire 2023-2024</h2>
+	        </div>
+	      </div>
+	      <h2>VOS NOTES</h2>
+	      <div class="entete2">
+	          <div>
+	            <h5>TRIMESTRE : <span id="nom">1er Trimestre</span> </h5>
+	            <h5>CLASSE : <span id="nom" th:text="${eleve.classe.codClasse}"></span></h5> 
+	          </div>
+	           <div>
+	             <h5>IDENFIANT : <span id="nom" th:text="${eleve.id}"></span></h5> 
+	             <h5> NOM ET PRENOM : <span id="nom" th:text="${eleve.nom}"></span> <span id="nom" th:text="${eleve.prenom}"></span> </h5> 
+	          </div>
+	      </div>
+	      <div>
+	        <table class="entete3">
+	          <tr class="tp">
+	            <td class="tp">MATIERES</td> <td class="tp"> COEFFICIENT</td> <td class="tp"> NOTES</td> <td class="tp"> APPRECIATIONS</td> 
+	          </tr>
+	          <tr class="tp" th:each="p:${lisnote}"th:if="${p.idEleve.id==ID}">
+					<td class="tp" th:text="${p.CodeMatiere.nomMatiere}"></td>
+					<td class="tp" th:text="${p.CodeMatiere.coef}"></td>
+					<td class="tp" th:text="${p.note}"></td>
+					<td class="tp" th:if="${p.note <10}">Faible</td>
+					<td class="tp" th:if="${p.note >=10 AND p.note<=11.99}">Passable</td>
+					<td class="tp" th:if="${p.note >=12 AND p.note<=13.99}">Assez Bien</td>
+					<td class="tp" th:if="${p.note >=14 AND p.note<=15.99}">Bien</td>
+					<td class="tp" th:if="${p.note >=16 AND p.note<=17.99}">Tres Bien</td>
+					<td class="tp" th:if="${p.note >=18 AND p.note<=19.99}">Excellent</td>
+					<td class="tp" th:if="${p.note ==20}">Parfait</td>
+			  </tr>
+	          
+	        </table>
+	         
+	      </div>
+	    
+	    </div>
+	    </section>
+	  
+	</body>
+</htlm>

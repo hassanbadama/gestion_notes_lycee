@@ -1,0 +1,3 @@
+FROM openjdk:20
+COPY target/expensetrackerapi.jar expensetrackerapi.jar
+ENTRYPOINT ["java","-jar","expensetrackerapi.jar"]

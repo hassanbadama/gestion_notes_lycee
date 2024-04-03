@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Insert title here</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+	</head>
+<body>
+ <header>
+   <div class="logo">
+	   <h1><img alt="" src="/images/logo.png" id="logo"></h1>
+   </div>
+   <nav id="l">
+       <div id="men">
+        <span><a th:href="@{bulletin}">GENERER BULLETIN</a></span>
+        <div id="sous">
+        </div>
+      </div>
+       <div id="men">
+        <span><a href="">Gestion Notes</a></span>
+        <div id="sous">
+          <span>  <a th:href="@{note}">AJOUTER</a></span>
+          <span>  <a th:href="@{afficherNote}">AFFICHER</a></span>
+        </div>
+      </div>
+   </nav>
+  </header>
+  <div class="page">
+    <h1> VOUS ETES CONNECTEZ EN TANT QUE </h1>
+    <h1 th:text="${p.nom}"></h1>
+    <h1 th:text="${p.prenom}"></h1>
+    
+      
+   </div>
+   <footer>
+  <center>
+	 <h1>LIYCEE MISKINE KALTANE </h1>
+     <hr>
+		
+	</center>
+</footer>
+ </body>
+</html>

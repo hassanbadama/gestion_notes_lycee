@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>teste hassane</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+        
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</head>
+ <body>
+<header>
+		   <div class="logo">
+			   <h1><img alt="" src="/images/logo.png" id="logo"></h1>
+		   </div>
+		   <nav id="l">
+		       <div id="men">
+		        <span><a th:each="p:${enseigne}" th:if="${p.Professeur.matricule==ID}"th:href="@{bulletinP?(classe=${p.codClasse})}">GENERER BULLETIN</a></span>
+		        <div id="sous">
+		        </div>
+		      </div>
+		       <div id="men">
+		       <span>  <a th:href="@{note}">AJOUTER</a></span>
+
+		      </div>
+          </nav>
+		 </header>
+	
+
+		<!-- <header>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+				  <a class="navbar-brand" th:each="p:${enseigne}" th:if="${p.Professeur.matricule==ID}"th:href="@{bulletinP?(classe=${p.codClasse})}">Generer bulletin</a>
+				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				  </button>
+				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					  <li class="nav-item">
+						<a class="nav-link active" th:href="@{note}" tabindex="-1" aria-disabled="true">Ajouter Notes</a>
+					  </li>
+					</ul>
+				   
+				  </div>
+				</div>
+				<div class="logo1">
+				  <h1><img alt="" src="/images/logo.png" id="logo"></h1>
+				</div>
+			  </nav>
+		</header>
+	-->
+		
+	 <section class="bulle1"th:each="eleve:${eleve1}"th:if="${eleve.classe==ID}">
+	 
+	    <div class="bulletin">
+	      <div class="entete1">
+	        <div class="information">
+	           <h5>Ministere de l'education nationale</h5>
+	           <h5>Direction Regionale de Yaounde</h5>
+	           <h5>Lycee d'enseignement Secondaire</h5>
+	           <h5>Lycee Miskine kaltane</h4>
+	           
+	        </div>
+	        <div class="logo1">
+	            <h1><img alt="" src="/images/logo.png" id="logo"></h1>
+	            <h2>Annee Scolaire 2023-2024</h2>
+	        </div>
+	        <div class="annee">
+	           <h3>Republique du Cameroune</h3>
+	           <h5>Paix  Travail Patrie</h5>
+	        </div>
+	      </div>
+	      <h2>BULLETIN DE NOTES PAR TRIMESTRE</h2>
+	      <div class="entete2">
+	          <div>
+	            <h5>TRIMESTRE : <span id="nom">1er Trimestre</span> </h5>
+	            <h5>CLASSE : <span id="nom" th:text="${eleve.nomclasse}"></span></h5> 
+	          </div>
+	           <div>
+	             <h5>IDENFIANT : <span id="nom" th:text="${eleve.id}"></span></h5> 
+	             <h5> NOM ET PRENOM : <span id="nom" th:text="${eleve.nom}"></span> <span id="nom" th:text="${eleve.prenom}"></span> </h5> 
+	             <h5>SEXE : <span id="nom" th:text="${eleve.sexe}"></span></h5> 
+	          </div>
+	      </div>
+	      <div>
+	        <table class="entete3">
+	          <tr class="tp">
+	            <td class="tp">MATIERES</td> <td class="tp"> COEFFICIENT</td> <td class="tp"> NOTES</td> <td class="tp"> APPRECIATIONS</td> 
+	          </tr>
+	          <tr class="tp" th:each="p:${lisnote}"th:if="${p.idEleve.id==eleve.id}">
+					<td class="tp" th:text="${p.CodeMatiere.nomMatiere}"></td>
+					<td class="tp" th:text="${p.CodeMatiere.coef}"></td>
+					<td class="tp" th:text="${p.note}"></td>
+					<td class="tp" th:if="${p.note <10}">Faible</td>
+					<td class="tp" th:if="${p.note >=10 AND p.note<=11.99}">Passable</td>
+					<td class="tp" th:if="${p.note >=12 AND p.note<=13.99}">Assez Bien</td>
+					<td class="tp" th:if="${p.note >=14 AND p.note<=15.99}">Bien</td>
+					<td class="tp" th:if="${p.note >=16 AND p.note<=17.99}">Tres Bien</td>
+					<td class="tp" th:if="${p.note >=18 AND p.note<=19.99}">Excellent</td>
+					<td class="tp" th:if="${p.note ==20}">Parfait</td>
+			  </tr>
+			   <tr class="tp">
+	            <td class="tp">Moyenne</td> <td class="tp" th:text="${eleve.coef}"></td> <td class="tp" th:text="${eleve.moyenne}"></td>
+	               <td class="tp" th:if="${eleve.moyenne < 10}">Faible</td>
+	               <td class="tp" th:if="${eleve.moyenne >=10 AND eleve.moyenne<=11.99}">Passable</td>
+					<td class="tp" th:if="${eleve.moyenne >=12 AND eleve.moyenne<=13.99}">Assez Bien</td>
+					<td class="tp" th:if="${eleve.moyenne >=14 AND eleve.moyenne<=15.99}">Bien</td>
+					<td class="tp" th:if="${eleve.moyenne >=16 AND eleve.moyenne<=17.99}">Tres Bien</td>
+					<td class="tp" th:if="${eleve.moyenne >=18 AND eleve.moyenne<=19.99}">Excellent</td>
+					<td class="tp" th:if="${eleve.moyenne ==20}">Parfait</td>
+	          </tr>
+	        </table>
+	        <div class="piedB">
+	        <div>
+	        <h3>Moyenne 1er Trimestre : <span class="taille" th:text="${eleve.moyenne}"></span>/20</h3>
+	        <h3>Appreciation : <span class="taille" th:if="${eleve.moyenne >=10 AND eleve.moyenne<=11.99}">Passablle</span>
+	               <span class="taille" th:if="${eleve.moyenne <10}">Faible</span>
+					<span class="taille" th:if="${eleve.moyenne >=12 AND eleve.moyenne<=13.99}">Assez Bien</span>
+					<span class="taille" th:if="${eleve.moyenne >=14 AND eleve.moyenne<=15.99}">Bien</span>
+					<span class="taille" th:if="${eleve.moyenne >=16 AND eleve.moyenne<=17.99}">Tres Bien</span>
+					<span class="taille" th:if="${eleve.moyenne >=18 AND eleve.moyenne<=19.99}">Excellent</span>
+					<span class="taille" th:if="${eleve.moyenne ==20}">Parfait</span>
+	        
+	        </h3>
+	        <h3>Decision : <span class="taille" th:if="${eleve.moyenne >=10}">Admin</span>
+	                     <span class="taille" th:if="${eleve.moyenne <10}">Echoué</span>
+	        </h3>
+	        <h3>Rang : <span class="taille" th:text="${eleve.rang}"></span>e </h3>
+	        </div>
+	        <div class="">
+	           <h3>Le Proviseur</h3>
+			   <h1><img alt="" src="/images/cachet.jpg" id="cachet"></h1>
+		   </div>
+		   </div>
+	      </div>
+	    </div>
+	    </section>
+	   
+	    <br>
+	    <br>
+	    <table>
+	    <tr>
+	    <td>
+	      
+	    </td>
+	    </tr>
+	    <tr>
+	      <td class="tp">Total</td>
+	      <td class="tp">Admis</td>
+	      <td class="tp">Echoues</td>
+	    </tr>
+	     <tr>
+	      <td class="tp" th:text="${nombre}"></td>
+	      <td class="tp" th:text="${admis}"></td>
+	      <td class="tp" th:text="${echoue}"></td>
+	      
+	    </tr>
+	    
+	    </table>
+		 <h1> <a th:href="@{tp}" class="text-danger me-2 deleteBtn" title="teste"> ENVOYER LES BULLETINS AUX PARENT DES ELEVES </a> </h1>
+	 </body>
+</html>
